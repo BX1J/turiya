@@ -1,0 +1,17 @@
+# Ignore all downloaded files
+downloads/*
+
+# But keep the folder itself
+!downloads/.gitkeep
+
+
+__pycache__/
+*.pyc
+instance/
+.env
+venv/
+*.log
+
+
+.DS_Store
+Thumbs.db

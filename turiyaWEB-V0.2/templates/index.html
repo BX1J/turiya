@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Turiya Downloader</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+  <div class="bg-blobs">
+    <span class="blob blob-1"></span>
+    <span class="blob blob-2"></span>
+    <span class="blob blob-3"></span>
+  </div>
+
+  <main class="container">
+    <section class="glass-card">
+      <header class="app-header">
+        <div class="brand">
+          <i class="ri-download-cloud-2-line"></i>
+          <h1>Turiya Downloader</h1>
+        </div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <i class="ri-moon-line"></i>
+        </button>
+      </header>
+
+      <form id="downloadForm" class="download-form">
+        <label class="field">
+          <span class="label">Media URL</span>
+          <div class="control">
+            <i class="ri-link"></i>
+            <input type="url" id="urlInput" placeholder="Paste a link from YouTube, TikTok, Instagram..." required />
+          </div>
+        </label>
+
+        <div class="row">
+          <label class="field">
+            <span class="label">Mode</span>
+            <div class="control select">
+              <i class="ri-magic-line"></i>
+              <select id="modeSelect">
+                <option value="smart">Smart</option>
+                <option value="video">Video</option>
+                <option value="audio">Audio</option>
+              </select>
+            </div>
+          </label>
+
+          <label class="field">
+            <span class="label">Quality</span>
+            <div class="control select">
+              <i class="ri-slideshow-2-line"></i>
+              <select id="qualitySelect">
+                <option value="best">Best</option>
+                <option value="1080p">1080p</option>
+                <option value="720p">720p</option>
+                <option value="480p">480p</option>
+                <option value="audio">Audio-only</option>
+              </select>
+            </div>
+          </label>
+        </div>
+
+        <button type="submit" class="primary-btn" id="downloadBtn">
+          <i class="ri-download-2-line"></i>
+          Start Download
+        </button>
+      </form>
+    </section>
+
+    <footer class="app-footer">
+      <span>Made with <i class="ri-heart-3-fill"></i> by brometheus</span>
+    </footer>
+  </main>
+
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+  <script>
+    // === Theme Toggle Logic ===
+    const themeToggle = document.getElementById("themeToggle");
+    const body = document.body;
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      body.setAttribute("data-theme", savedTheme);
+      updateThemeIcon(savedTheme);
+    }
+    themeToggle.addEventListener("click", () => {
+      const currentTheme = body.getAttribute("data-theme") === "light" ? "dark" : "light";
+      body.setAttribute("data-theme", currentTheme);
+      localStorage.setItem("theme", currentTheme);
+      updateThemeIcon(currentTheme);
+    });
+    function updateThemeIcon(theme) {
+      const icon = themeToggle.querySelector("i");
+      icon.className = theme === "light" ? "ri-sun-line" : "ri-moon-line";
+    }
+  </script>
+</body>
+</html>
