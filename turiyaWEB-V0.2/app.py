@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from downloader import start_download
+import threading
 
 app = Flask(__name__)
 
@@ -11,7 +12,7 @@ def home():
 def download():
     link = request.get_json()
     link = link['link']
-    start_download(link)
+    download1 = threading.Thread(target=start_download(link))
     return {"status":"downloading"}
     
 
